@@ -9,6 +9,7 @@ import {
 import { SidebarProvider, SidebarTrigger } from "@/Components/ui/sidebar";
 import { Link } from "@inertiajs/react";
 import React, { PropsWithChildren } from "react";
+import { Toaster } from "@/Components/ui/toaster";
 
 export default function Authenticated({
     breadCrumb,
@@ -53,6 +54,7 @@ export default function Authenticated({
                 </header>
                 <div style={{ zoom: "92%" }}>{children}</div>
             </main>
+            <Toaster />
         </SidebarProvider>
     );
 }

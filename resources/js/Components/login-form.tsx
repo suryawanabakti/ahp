@@ -11,6 +11,7 @@ import {
 import { Input } from "@/Components/ui/input";
 import { Label } from "@/Components/ui/label";
 import { FormEventHandler } from "react";
+import InputError from "./InputError";
 
 export function LoginForm({
     status,
@@ -53,6 +54,7 @@ export function LoginForm({
                             value={data.email}
                             onChange={(e) => setData("email", e.target.value)}
                         />
+                        <InputError message={errors.email} className="mt-2" />
                     </div>
                     <div className="grid gap-2">
                         <div className="flex items-center">
@@ -73,8 +75,17 @@ export function LoginForm({
                                 setData("password", e.target.value)
                             }
                         />
+                        <InputError
+                            message={errors.password}
+                            className="mt-2"
+                        />
                     </div>
-                    <Button type="submit" className="w-full" onClick={submit}>
+                    <Button
+                        type="submit"
+                        className="w-full"
+                        onClick={submit}
+                        disabled={processing}
+                    >
                         Login
                     </Button>
                     <Button variant="outline" className="w-full">

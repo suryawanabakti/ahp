@@ -60,7 +60,7 @@ export function NavMaster({
                                             <SidebarMenuSubButton
                                                 asChild
                                                 isActive={route().current(
-                                                    subItem.name
+                                                    subItem.name + "*"
                                                 )}
                                             >
                                                 <Link href={subItem.url}>

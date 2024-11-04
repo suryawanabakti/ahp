@@ -39,9 +39,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         },
         teams: [
             {
-                name: "Square Dev",
+                name: "AHP",
                 logo: GalleryVerticalEnd,
-                plan: "Super Admin",
+                plan: "Yayasan dr. H. Alifuddinn",
             },
         ],
         navMaster: [
@@ -55,6 +55,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                         title: "Users",
                         url: "/users",
                         name: "users",
+                    },
+                    {
+                        title: "Kandidat",
+                        url: "/candidates",
+                        name: "candidates",
+                    },
+                    {
+                        title: "Kriteria",
+                        url: "/criterias",
+                        name: "criterias",
                     },
                 ],
             },
