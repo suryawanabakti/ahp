@@ -13,7 +13,8 @@ class CriteriaSeeder extends Seeder
      */
     public function run(): void
     {
-        $criteria = ['Prestasi Akademik', 'Penghasilan Orang Tua', 'Kegiatan Ekstrakurikuler', 'Kehadiran di Sekolah'];
+        $criteria = ['Peringkat', 'Nilai rata-rata', 'Akademik', 'Non Akademik'];
+
         $no = 1;
         foreach ($criteria as $criterion) {
             Criteria::create(['name' => $criterion, 'code' => "C" . $no]);

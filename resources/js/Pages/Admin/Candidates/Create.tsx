@@ -23,10 +23,10 @@ export default function CreateCandidate({}: any) {
 
     const { data, setData, processing, post, reset, errors } = useForm({
         full_name: "",
-        academic_performance: "",
-        family_income: "",
-        extracurricular_activities: "",
-        attendance: "",
+        c1: "",
+        c2: "",
+        c3: "",
+        c4: "",
     });
     const submit: FormEventHandler = async (e) => {
         e.preventDefault();
@@ -104,20 +104,53 @@ export default function CreateCandidate({}: any) {
                                 />
                             </div>
                             <div className="grid grid-cols-4 items-center gap-4">
+                                <Label htmlFor="npm" className="text-right">
+                                    NPM
+                                </Label>
+                                <Input
+                                    id="npm"
+                                    value={data.npm}
+                                    onChange={(e) =>
+                                        setData("npm", e.target.value)
+                                    }
+                                    placeholder="Masukkan NPM..."
+                                    className="col-span-3"
+                                />
+                                <InputError
+                                    className="col-span-2 text-right"
+                                    message={errors.full_name}
+                                />
+                            </div>
+                            <div className="grid grid-cols-4 items-center gap-4">
+                                <Label htmlFor="jurusan" className="text-right">
+                                    Jurusan
+                                </Label>
+                                <Input
+                                    id="jurusan"
+                                    value={data.jurusan}
+                                    onChange={(e) =>
+                                        setData("jurusan", e.target.value)
+                                    }
+                                    placeholder="Masukkan nama lengkap..."
+                                    className="col-span-3"
+                                />
+                                <InputError
+                                    className="col-span-2 text-right"
+                                    message={errors.full_name}
+                                />
+                            </div>
+                            <div className="grid grid-cols-4 items-center gap-4">
                                 <Label
                                     htmlFor="academic_performance"
                                     className="text-right"
                                 >
-                                    Prestasi Akademik
+                                    Peringkat
                                 </Label>
                                 <Input
-                                    id="academic_performance"
-                                    value={data.academic_performance}
+                                    id="c1"
+                                    value={data.c1}
                                     onChange={(e) =>
-                                        setData(
-                                            "academic_performance",
-                                            e.target.value
-                                        )
+                                        setData("c1", e.target.value)
                                     }
                                     type="number"
                                     placeholder="Masukkan prestasi akademik antara 1-100"
@@ -125,7 +158,7 @@ export default function CreateCandidate({}: any) {
                                 />
                                 <InputError
                                     className="col-span-2 text-right"
-                                    message={errors.academic_performance}
+                                    message={errors.c1}
                                 />
                             </div>
                             <div className="grid grid-cols-4 items-center gap-4">
@@ -133,13 +166,13 @@ export default function CreateCandidate({}: any) {
                                     htmlFor="family_income"
                                     className="text-right"
                                 >
-                                    Pendapatan Keluarga
+                                    Nilai rata-rata
                                 </Label>
                                 <Input
                                     id="family_income"
-                                    value={data.family_income}
+                                    value={data.c2}
                                     onChange={(e) =>
-                                        setData("family_income", e.target.value)
+                                        setData("c2", e.target.value)
                                     }
                                     type="number"
                                     placeholder="Masukkan pendapatan keluarga antara 1-100"
@@ -147,7 +180,7 @@ export default function CreateCandidate({}: any) {
                                 />
                                 <InputError
                                     className="col-span-2 text-right"
-                                    message={errors.family_income}
+                                    message={errors.c2}
                                 />
                             </div>
                             <div className="grid grid-cols-4 items-center gap-4">
@@ -155,47 +188,41 @@ export default function CreateCandidate({}: any) {
                                     htmlFor="extracurricular_activities"
                                     className="text-right"
                                 >
-                                    Ekstrakurikuler
+                                    Akademik
                                 </Label>
                                 <Input
-                                    id="extracurricular_activities"
+                                    id="c3"
                                     onChange={(e) =>
-                                        setData(
-                                            "extracurricular_activities",
-                                            e.target.value
-                                        )
+                                        setData("c3", e.target.value)
                                     }
-                                    value={data.extracurricular_activities}
+                                    value={data.c3}
                                     type="number"
-                                    placeholder="Masukkan Ekstrakurikuler antara 1-100"
+                                    placeholder="Masukkan Prestasi Akademik antara 1-100"
                                     className="col-span-3"
                                 />
                                 <InputError
                                     className="col-span-2 text-right"
-                                    message={errors.extracurricular_activities}
+                                    message={errors.c3}
                                 />
                             </div>
                             <div className="grid grid-cols-4 items-center gap-4">
-                                <Label
-                                    htmlFor="attendance"
-                                    className="text-right"
-                                >
-                                    Kehadiran
+                                <Label htmlFor="c4" className="text-right">
+                                    Non Akademik
                                 </Label>
                                 <Input
-                                    id="attendance"
+                                    id="c4"
                                     onChange={(e) =>
-                                        setData("attendance", e.target.value)
+                                        setData("c4", e.target.value)
                                     }
-                                    value={data.attendance}
+                                    value={data.c4}
                                     type="number"
                                     max={100}
-                                    placeholder="Masukkan Kehadiran antara 1-100"
+                                    placeholder="Masukkan Non AKademik antara 1-100"
                                     className="col-span-3"
                                 />
                                 <InputError
                                     className="col-span-2 text-right"
-                                    message={errors.attendance}
+                                    message={errors.c4}
                                 />
                             </div>
                         </div>

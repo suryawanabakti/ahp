@@ -140,7 +140,7 @@ export function DataTableCandidates({ data }: { data: Users[] }) {
             ),
         },
         {
-            accessorKey: "academic_performance",
+            accessorKey: "c1",
             header: ({ column }) => {
                 return (
                     <Button
@@ -155,13 +155,11 @@ export function DataTableCandidates({ data }: { data: Users[] }) {
                 );
             },
             cell: ({ row }) => (
-                <div className="lowercase">
-                    {row.getValue("academic_performance")}
-                </div>
+                <div className="lowercase">{row.getValue("c1")}</div>
             ),
         },
         {
-            accessorKey: "family_income",
+            accessorKey: "c2",
             header: ({ column }) => {
                 return (
                     <Button
@@ -176,11 +174,11 @@ export function DataTableCandidates({ data }: { data: Users[] }) {
                 );
             },
             cell: ({ row }) => (
-                <div className="lowercase">{row.getValue("family_income")}</div>
+                <div className="lowercase">{row.getValue("c2")}</div>
             ),
         },
         {
-            accessorKey: "family_income",
+            accessorKey: "c3",
             header: ({ column }) => {
                 return (
                     <Button
@@ -195,11 +193,11 @@ export function DataTableCandidates({ data }: { data: Users[] }) {
                 );
             },
             cell: ({ row }) => (
-                <div className="lowercase">{row.getValue("family_income")}</div>
+                <div className="lowercase">{row.getValue("c3")}</div>
             ),
         },
         {
-            accessorKey: "extracurricular_activities",
+            accessorKey: "c4",
             header: ({ column }) => {
                 return (
                     <Button
@@ -214,9 +212,7 @@ export function DataTableCandidates({ data }: { data: Users[] }) {
                 );
             },
             cell: ({ row }) => (
-                <div className="lowercase">
-                    {row.getValue("extracurricular_activities")}
-                </div>
+                <div className="lowercase">{row.getValue("c4")}</div>
             ),
         },
         {

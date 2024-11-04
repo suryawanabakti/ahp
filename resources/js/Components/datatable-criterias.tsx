@@ -100,7 +100,7 @@ export function DataTableCriterias({ data }: { data: Users[] }) {
             enableHiding: false,
         },
         {
-            accessorKey: "id",
+            accessorKey: "code",
             header: ({ column }) => {
                 return (
                     <Button
@@ -109,14 +109,12 @@ export function DataTableCriterias({ data }: { data: Users[] }) {
                             column.toggleSorting(column.getIsSorted() === "asc")
                         }
                     >
-                        ID
+                        Kode
                         <ArrowUpDown className="ml-2 h-4 w-4" />
                     </Button>
                 );
             },
-            cell: ({ row }) => (
-                <div className="lowercase">{row.getValue("id")}</div>
-            ),
+            cell: ({ row }) => <div className="">{row.getValue("code")}</div>,
             enableSorting: true,
         },
 

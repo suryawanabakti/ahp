@@ -39,7 +39,8 @@ export function LoginForm({
             <CardHeader>
                 <CardTitle className="text-2xl">Login</CardTitle>
                 <CardDescription>
-                    Enter your email below to login to your account
+                    Masukkan email dan password anda di bawah untuk masuk ke
+                    halaman utama.
                 </CardDescription>
             </CardHeader>
             <CardContent>
@@ -60,7 +61,7 @@ export function LoginForm({
                         <div className="flex items-center">
                             <Label htmlFor="password">Password</Label>
                             <Link
-                                href="#"
+                                href="/forgot-password"
                                 className="ml-auto inline-block text-sm underline"
                             >
                                 Forgot your password?

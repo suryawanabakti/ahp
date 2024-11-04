@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('full_name')->nullable();
             $table->text('address')->nullable();
             $table->enum('gender', ['male', 'female']);
-            $table->float('academic_performance');
-            $table->float('family_income');
-            $table->float('extracurricular_activities');
-            $table->float('attendance');
+            $table->float('c1');
+            $table->float('c2');
+            $table->float('c3');
+            $table->float('c4');
             $table->timestamps();
         });
     }
