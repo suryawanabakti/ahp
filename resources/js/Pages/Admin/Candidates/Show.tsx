@@ -66,6 +66,26 @@ export default function ShowCandidate({ candidate }: any) {
                             </div>
                             <div className="grid grid-cols-4 items-center gap-4">
                                 <label className="text-right">
+                                    File Raport:
+                                </label>
+                                <div className="col-span-3">
+                                    <a
+                                        href={`/storage/${candidate.pdf_raport}`}
+                                    >
+                                        Raport
+                                    </a>
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-4 items-center gap-4">
+                                <label className="text-right">File SKHU:</label>
+                                <div className="col-span-3">
+                                    <a href={`/storage/${candidate.pdf_skhu}`}>
+                                        SKHU
+                                    </a>
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-4 items-center gap-4">
+                                <label className="text-right">
                                     Peringkat (C1):
                                 </label>
                                 <div className="col-span-3">{candidate.c1}</div>

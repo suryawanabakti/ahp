@@ -21,10 +21,10 @@ return new class extends Migration
             $table->enum('gender', ['male', 'female']);
             $table->string('pdf_raport')->nullable();
             $table->string('pdf_skhu')->nullable();
-            $table->float('c1');
-            $table->float('c2');
-            $table->float('c3');
-            $table->float('c4');
+            $table->float('c1')->default(0);
+            $table->float('c2')->default(0);
+            $table->float('c3')->default(0);
+            $table->float('c4')->default(0);
             $table->timestamps();
         });
     }

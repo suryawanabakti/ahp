@@ -26,6 +26,7 @@ import {
 } from "@/Components/ui/sidebar";
 import { NavMain } from "./nav-main";
 import { usePage } from "@inertiajs/react";
+import { NavMainUser } from "./nav-main-user";
 
 // This is sample data.
 
@@ -76,10 +77,17 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarHeader>
                 <TeamSwitcher teams={data.teams} />
             </SidebarHeader>
-            <SidebarContent>
-                <NavMain />
-                <NavMaster items={data.navMaster} />
-            </SidebarContent>
+            {user.level == "admin" && (
+                <SidebarContent>
+                    <NavMain />
+                    <NavMaster items={data.navMaster} />
+                </SidebarContent>
+            )}
+            {user.level == "maba" && (
+                <SidebarContent>
+                    <NavMainUser />
+                </SidebarContent>
+            )}
             <SidebarFooter>
                 <NavUser user={data.user} />
             </SidebarFooter>

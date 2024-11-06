@@ -18,6 +18,9 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
+    if (request()->user()->level != 'admin') {
+        return redirect('/rankings');
+    }
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
