@@ -13,9 +13,14 @@ return new class extends Migration
     {
         Schema::create('candidates', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id'); // Team
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->string('npm')->nullable();
             $table->string('full_name')->nullable();
-            $table->text('address')->nullable();
+            $table->string('jurusan')->nullable();
             $table->enum('gender', ['male', 'female']);
+            $table->string('pdf_raport')->nullable();
+            $table->string('pdf_skhu')->nullable();
             $table->float('c1');
             $table->float('c2');
             $table->float('c3');

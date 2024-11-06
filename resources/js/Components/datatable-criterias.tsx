@@ -137,7 +137,7 @@ export function DataTableCriterias({ data }: { data: Users[] }) {
         },
 
         {
-            accessorKey: "created_at",
+            accessorKey: "updated_at",
             header: ({ column }) => {
                 return (
                     <Button
@@ -146,14 +146,14 @@ export function DataTableCriterias({ data }: { data: Users[] }) {
                             column.toggleSorting(column.getIsSorted() === "asc")
                         }
                     >
-                        Created At
+                        Updated At
                         <ArrowUpDown className="ml-2 h-4 w-4" />
                     </Button>
                 );
             },
             cell: ({ row }) => (
                 <div className="">
-                    {moment(row.getValue("created_at")).format(
+                    {moment(row.getValue("updated_at")).format(
                         "DD MMM YYYY HH:mm:ss"
                     )}
                 </div>
@@ -252,34 +252,6 @@ export function DataTableCriterias({ data }: { data: Users[] }) {
                         onChange={handleFilterChange}
                         className="max-w-sm"
                     />
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <Button variant="outline" className="ml-auto">
-                                Actions
-                                <ChevronDown className="ml-2 h-4 w-4" />
-                            </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                            <DropdownMenuItem>
-                                {" "}
-                                <Plus />
-                                <span>Tambah</span>
-                                <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                {" "}
-                                <Upload />
-                                <span>Import</span>
-                                <DropdownMenuShortcut>⇧⌘I</DropdownMenuShortcut>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                {" "}
-                                <Download />
-                                <span>Export</span>
-                                <DropdownMenuShortcut>⇧⌘E</DropdownMenuShortcut>
-                            </DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
                 </div>
                 <div className="rounded-md border">
                     <Table>

@@ -24,10 +24,10 @@ class RankingController extends Controller
             return Inertia::render("Admin/Error", ["message" => $message, "redirect_url" => $redirect_url]);
         }
 
-        $wPrestasiAkademik = Weight::whereHas('criteria', fn($q) => $q->where('code', "C1"))->first()->weight;
-        $wPenghasilanOrangTua = Weight::whereHas('criteria', fn($q) => $q->where('code', "C2"))->first()->weight;
-        $wKegiatanEkstrakurikuler = Weight::whereHas('criteria', fn($q) => $q->where('code', "C3"))->first()->weight;
-        $wKehadiranDiSekolah = Weight::whereHas('criteria', fn($q) => $q->where('code', "C4"))->first()->weight;
+        $c1 = Weight::whereHas('criteria', fn($q) => $q->where('code', "C1"))->first()->weight;
+        $c2 = Weight::whereHas('criteria', fn($q) => $q->where('code', "C2"))->first()->weight;
+        $c3 = Weight::whereHas('criteria', fn($q) => $q->where('code', "C3"))->first()->weight;
+        $c4 = Weight::whereHas('criteria', fn($q) => $q->where('code', "C4"))->first()->weight;
 
 
         // Ambil semua data siswa
@@ -37,17 +37,17 @@ class RankingController extends Controller
         foreach ($candidates as $candidate) {
             // Hitung skor akhir untuk setiap siswa
             $score = (
-                ($candidate->academic_performance * $wPrestasiAkademik) +
-                ($candidate->family_income * $wPenghasilanOrangTua) +
-                ($candidate->extracurricular_activities * $wKegiatanEkstrakurikuler) +
-                ($candidate->attendance * $wKehadiranDiSekolah)
+                ($candidate->c1 * $c1) +
+                ($candidate->c2 * $c2) +
+                ($candidate->c3 * $c3) +
+                ($candidate->c4 * $c4)
             );
 
             // Simpan skor dengan data siswa
             $scores[] = [
                 'id' => $candidate->id,
                 'full_name' => $candidate->full_name,
-                'score' => $score,
+                'score' => number_format($score, 1),
             ];
         }
 

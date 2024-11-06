@@ -219,19 +219,17 @@ export function DataTableUsers({ data }: { data: Users[] }) {
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
-                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                            <DropdownMenuLabel>Aksi</DropdownMenuLabel>
+                            {/* <DropdownMenuItem>Rincian</DropdownMenuItem> */}
                             <DropdownMenuItem
                                 onClick={() =>
                                     navigator.clipboard.writeText(payment.id)
                                 }
                             >
-                                Copy payment ID
+                                Mengedit
                             </DropdownMenuItem>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem>View customer</DropdownMenuItem>
-                            <DropdownMenuItem>
-                                View payment details
-                            </DropdownMenuItem>
+                            {/* <DropdownMenuSeparator /> */}
+                            <DropdownMenuItem>Menghapus</DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
                 );

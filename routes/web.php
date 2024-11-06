@@ -7,6 +7,7 @@ use App\Http\Controllers\PairwiseComparisonController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RankingController;
 use App\Http\Controllers\ShowWeightController;
+use App\Http\Controllers\UpdatePairwsiseComparisonController;
 use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +38,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/weights', ShowWeightController::class)->name('weights');
     Route::get('/pairwise-comparison', PairwiseComparisonController::class)->name('pairwise-comparison');
+    Route::patch('/pairwise-comparison', UpdatePairwsiseComparisonController::class)->name('pairwise-comparison.update');
     Route::get('/calculate-weight', CalculateWeightController::class)->name('calculate-weight');
 
     Route::resource('candidates', CandidateController::class)->names('candidates');

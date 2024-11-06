@@ -19,27 +19,28 @@ import { FormEventHandler } from "react";
 import InputError from "@/Components/InputError";
 import { ListPeringkat } from "@/Components/list-peringkat";
 
-export default function CreateCandidate({}: any) {
+export default function EditCandidate({ candidate }: any) {
     const { toast } = useToast();
-
-    const { data, setData, processing, post, reset, errors } = useForm({
-        full_name: "",
-        npm: "",
-        jurusan: "",
-        c1: "",
-        c2: "",
-        c3: "",
-        c4: "",
+    console.log("CANDIDAE", candidate);
+    const { data, setData, processing, patch, reset, errors } = useForm({
+        full_name: candidate.full_name,
+        npm: candidate.npm,
+        jurusan: candidate.jurusan,
+        c1: candidate.c1,
+        c2: candidate.c2,
+        c3: candidate.c3,
+        c4: candidate.c4,
     });
+
     const submit: FormEventHandler = async (e) => {
         e.preventDefault();
-        post(route("candidates.store"), {
+        patch(route("candidates.update", candidate.id), {
             preserveState: true,
             preserveScroll: true,
             onSuccess: () => {
                 toast({
-                    title: "Berhasil ✅",
-                    description: "Berhasil tambah kandidat ." + data.full_name,
+                    title: "Berhasil Ubah ✅",
+                    description: "Berhasil ubah kandidat ." + data.full_name,
                 }),
                     reset();
             },
@@ -56,7 +57,7 @@ export default function CreateCandidate({}: any) {
                 link: "/candidates",
             },
             {
-                label: "Create",
+                label: "Edit",
                 link: "/candidates/create",
             },
         ],
@@ -64,14 +65,14 @@ export default function CreateCandidate({}: any) {
 
     return (
         <AuthenticatedLayout breadCrumb={datas.breadCrumb}>
-            <Head title="Tambah Kandidat" />
+            <Head title="Edit Kandidat" />
 
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4 ps-5 pe-5">
                 <Card className="w-full">
                     <CardHeader>
-                        <CardTitle>Tambah Kandidat</CardTitle>
+                        <CardTitle>Edit Kandidat</CardTitle>
                         <CardDescription>
-                            Tambah Kandidat AHP adalah fitur dalam sistem
+                            Edit Kandidat AHP adalah fitur dalam sistem
                             pendukung keputusan berbasis metode Analytic
                             Hierarchy Process (AHP) yang memungkinkan pengguna
                             menambahkan calon penerima beasiswa atau alternatif
@@ -149,7 +150,10 @@ export default function CreateCandidate({}: any) {
                                 >
                                     Peringkat (C1)
                                 </Label>
-                                <ListPeringkat setData={setData} />
+                                <ListPeringkat
+                                    setData={setData}
+                                    peringkat={candidate.c1}
+                                />
                                 <InputError
                                     className="col-span-2 text-right"
                                     message={errors.c1}
@@ -224,7 +228,7 @@ export default function CreateCandidate({}: any) {
                             onClick={submit}
                             disabled={processing}
                         >
-                            Save
+                            Save changes
                         </Button>
                         <Button
                             type="button"

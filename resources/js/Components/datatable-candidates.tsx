@@ -57,13 +57,26 @@ import { router } from "@inertiajs/react";
 export type Users = {
     id: string;
     full_name: string;
+    user: {
+        level: string;
+    };
     created_at: string;
     updated_at: string;
 };
 
 export function DataTableCandidates({ data }: { data: Users[] }) {
     const [rowsSelected, setRowsSelected] = React.useState([]);
-
+    const convertPeringkatToValue = (peringkat: number) => {
+        if (peringkat == 1) {
+            return 100;
+        }
+        if (peringkat == 2) {
+            return 66.6;
+        }
+        if (peringkat == 3) {
+            return 33.3;
+        }
+    };
     const columns: ColumnDef<Users>[] = [
         {
             id: "select",
@@ -140,6 +153,25 @@ export function DataTableCandidates({ data }: { data: Users[] }) {
             ),
         },
         {
+            accessorKey: "level",
+            header: ({ column }) => {
+                return (
+                    <Button
+                        variant="ghost"
+                        onClick={() =>
+                            column.toggleSorting(column.getIsSorted() === "asc")
+                        }
+                    >
+                        Level
+                        <ArrowUpDown className="ml-2 h-4 w-4" />
+                    </Button>
+                );
+            },
+            cell: ({ row }) => (
+                <div className="lowercase">{row.original.user?.level}</div>
+            ),
+        },
+        {
             accessorKey: "c1",
             header: ({ column }) => {
                 return (
@@ -155,7 +187,10 @@ export function DataTableCandidates({ data }: { data: Users[] }) {
                 );
             },
             cell: ({ row }) => (
-                <div className="lowercase">{row.getValue("c1")}</div>
+                <div className="lowercase">
+                    {row.getValue("c1")} /{" "}
+                    {convertPeringkatToValue(row.getValue("c1"))}
+                </div>
             ),
         },
         {
@@ -243,7 +278,7 @@ export function DataTableCandidates({ data }: { data: Users[] }) {
             id: "actions",
             enableHiding: false,
             cell: ({ row }) => {
-                const payment = row.original;
+                const candidate = row.original;
 
                 return (
                     <DropdownMenu>
@@ -255,16 +290,37 @@ export function DataTableCandidates({ data }: { data: Users[] }) {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Aksi</DropdownMenuLabel>
-                            <DropdownMenuItem>Rincian</DropdownMenuItem>
                             <DropdownMenuItem
                                 onClick={() =>
-                                    navigator.clipboard.writeText(payment.id)
+                                    router.get(
+                                        route("candidates.show", candidate.id)
+                                    )
+                                }
+                            >
+                                Rincian
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                                onClick={() =>
+                                    router.get(
+                                        route("candidates.edit", candidate.id)
+                                    )
                                 }
                             >
                                 Mengedit
                             </DropdownMenuItem>
                             {/* <DropdownMenuSeparator /> */}
-                            <DropdownMenuItem>Menghapus</DropdownMenuItem>
+                            <DropdownMenuItem
+                                onClick={() =>
+                                    router.delete(
+                                        route(
+                                            "candidates.destroy",
+                                            candidate.id
+                                        )
+                                    )
+                                }
+                            >
+                                Menghapus
+                            </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
                 );

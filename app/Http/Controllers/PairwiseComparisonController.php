@@ -45,9 +45,27 @@ class PairwiseComparisonController extends Controller
             [$comparisons[4][1], $comparisons[4][2], $comparisons[4][3], $comparisons[4][4]],    // Kehadiran di Sekolah
         ];
 
+        $c1c2 = PairwiseComparison::where('criteria1_id', 1)->where('criteria2_id', 2)->first();
+        $c1c3 = PairwiseComparison::where('criteria1_id', 1)->where('criteria2_id', 3)->first();
+        $c1c4 = PairwiseComparison::where('criteria1_id', 1)->where('criteria2_id', 4)->first();
+
+        $c2c3 = PairwiseComparison::where('criteria1_id', 2)->where('criteria2_id', 3)->first();
+        $c4c2 = PairwiseComparison::where('criteria1_id', 4)->where('criteria2_id', 2)->first();
+        $c4c3 = PairwiseComparison::where('criteria1_id', 4)->where('criteria2_id', 3)->first();
+
+        $versus = [
+            "c1c2" => $c1c2,
+            "c1c3" => $c1c3,
+            "c1c4" => $c1c4,
+            "c2c3" => $c2c3,
+            "c4c2" => $c4c2,
+            "c4c3" => $c4c3,
+        ];
+
         return Inertia::render("Admin/PairwiseComparison/page", [
             "criterias" => $criterias,
             "comparisons" => $finalComparisons,
+            "versus" => $versus,
         ]);
     }
 }
