@@ -63,7 +63,10 @@ export function NavMaster({
                                                     subItem.name + "*"
                                                 )}
                                             >
-                                                <Link href={subItem.url}>
+                                                <Link
+                                                    href={subItem.url}
+                                                    preserveScroll={true}
+                                                >
                                                     <span>{subItem.title}</span>
                                                 </Link>
                                             </SidebarMenuSubButton>

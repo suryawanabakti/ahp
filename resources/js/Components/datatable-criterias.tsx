@@ -52,6 +52,7 @@ import {
     CardHeader,
     CardTitle,
 } from "./ui/card";
+import { router } from "@inertiajs/react";
 
 export type Users = {
     id: string;
@@ -179,7 +180,9 @@ export function DataTableCriterias({ data }: { data: Users[] }) {
 
                             <DropdownMenuItem
                                 onClick={() =>
-                                    navigator.clipboard.writeText(payment.id)
+                                    router.get(
+                                        route("criterias.edit", row.original.id)
+                                    )
                                 }
                             >
                                 Mengedit

@@ -46,7 +46,7 @@ class CriteriaController extends Controller
      */
     public function edit(Criteria $criteria)
     {
-        //
+        return Inertia::render("Admin/Criterias/Edit", ["criteria" => $criteria]);
     }
 
     /**
@@ -54,7 +54,14 @@ class CriteriaController extends Controller
      */
     public function update(Request $request, Criteria $criteria)
     {
-        //
+        $request->validate([
+            'name' => ['required']
+        ]);
+
+        $criteria->update([
+            'name' => $request->name
+        ]);
+        return redirect()->route('criterias.index');
     }
 
     /**

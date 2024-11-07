@@ -103,6 +103,7 @@ class CandidateController extends Controller
     public function destroy(Candidate $candidate)
     {
         $candidate->delete();
+        $candidate->user()->delete();
         return   back();
     }
 }

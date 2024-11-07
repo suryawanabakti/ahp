@@ -71,16 +71,20 @@ export default function ShowCandidate({ candidate }: any) {
                                 <div className="col-span-3">
                                     <a
                                         href={`/storage/${candidate.pdf_raport}`}
+                                        download
                                     >
-                                        Raport
+                                        Download Raport
                                     </a>
                                 </div>
                             </div>
                             <div className="grid grid-cols-4 items-center gap-4">
                                 <label className="text-right">File SKHU:</label>
                                 <div className="col-span-3">
-                                    <a href={`/storage/${candidate.pdf_skhu}`}>
-                                        SKHU
+                                    <a
+                                        href={`/storage/${candidate.pdf_skhu}`}
+                                        download
+                                    >
+                                        Download SKHU
                                     </a>
                                 </div>
                             </div>

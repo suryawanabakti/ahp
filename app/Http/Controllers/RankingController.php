@@ -36,8 +36,16 @@ class RankingController extends Controller
 
         foreach ($candidates as $candidate) {
             // Hitung skor akhir untuk setiap siswa
+            $candidateC1 = 0;
+            if ($candidate->c1 == 1) {
+                $candidateC1 = 100;
+            } elseif ($candidate->c1 == 2) {
+                $candidateC1 = 66;
+            } elseif ($candidate->c1 == 3) {
+                $candidateC1 = 33;
+            }
             $score = (
-                ($candidate->c1 * $c1) +
+                ($candidateC1 * $c1) +
                 ($candidate->c2 * $c2) +
                 ($candidate->c3 * $c3) +
                 ($candidate->c4 * $c4)

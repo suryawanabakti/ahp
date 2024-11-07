@@ -23,7 +23,10 @@ export function NavMain({}) {
                             asChild
                             isActive={route().current("dashboard")}
                         >
-                            <Link href={route("dashboard")}>
+                            <Link
+                                href={route("dashboard")}
+                                preserveScroll={true}
+                            >
                                 <Home />
                                 <span>Home</span>
                             </Link>
@@ -34,7 +37,10 @@ export function NavMain({}) {
                             asChild
                             isActive={route().current("rankings*")}
                         >
-                            <Link href={route("rankings")}>
+                            <Link
+                                href={route("rankings")}
+                                preserveScroll={true}
+                            >
                                 <AwardIcon />
                                 <span>Perankingan</span>
                             </Link>
