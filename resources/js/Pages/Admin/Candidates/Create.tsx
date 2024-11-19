@@ -26,6 +26,8 @@ export default function CreateCandidate({}: any) {
         full_name: "",
         npm: "",
         jurusan: "",
+        jumlah_prestasi_akademik: 0,
+        jumlah_prestasi_non_akademik: 0,
         c1: "",
         c2: "",
         c3: "",
@@ -178,8 +180,33 @@ export default function CreateCandidate({}: any) {
                                 />
                             </div>
                             <div className="grid grid-cols-4 items-center gap-4">
+                                <Label
+                                    htmlFor="jumlah_prestasi_akademik"
+                                    className="text-right"
+                                >
+                                    Jumlah Prestasi Akademik
+                                </Label>
+                                <Input
+                                    id="jumlah_prestasi_akademik"
+                                    onChange={(e: any) =>
+                                        setData(
+                                            "jumlah_prestasi_akademik",
+                                            e.target.value
+                                        )
+                                    }
+                                    value={data.jumlah_prestasi_akademik}
+                                    type="number"
+                                    placeholder="Masukkan Jumlah Prestasi Akademik "
+                                    className="col-span-3"
+                                />
+                                <InputError
+                                    className="col-span-2 text-right"
+                                    message={errors.c3}
+                                />
+                            </div>
+                            <div className="grid grid-cols-4 items-center gap-4">
                                 <Label htmlFor="c3" className="text-right">
-                                    Akademik (C3)
+                                    Prestasi Akademik (C3)
                                 </Label>
                                 <Input
                                     id="c3"
@@ -188,7 +215,32 @@ export default function CreateCandidate({}: any) {
                                     }
                                     value={data.c3}
                                     type="number"
-                                    placeholder="Masukkan Prestasi Akademik "
+                                    placeholder="Masukkan Nilai Prestasi Akademik "
+                                    className="col-span-3"
+                                />
+                                <InputError
+                                    className="col-span-2 text-right"
+                                    message={errors.c3}
+                                />
+                            </div>
+                            <div className="grid grid-cols-4 items-center gap-4">
+                                <Label
+                                    htmlFor="jumlah_prestasi_non_akademik"
+                                    className="text-right"
+                                >
+                                    Jumlah Prestasi Non Akademik
+                                </Label>
+                                <Input
+                                    id="jumlah_prestasi_non_akademik"
+                                    onChange={(e: any) =>
+                                        setData(
+                                            "jumlah_prestasi_non_akademik",
+                                            e.target.value
+                                        )
+                                    }
+                                    value={data.jumlah_prestasi_non_akademik}
+                                    type="number"
+                                    placeholder="Masukkan Jumlah Non Prestasi Akademik "
                                     className="col-span-3"
                                 />
                                 <InputError
@@ -198,7 +250,7 @@ export default function CreateCandidate({}: any) {
                             </div>
                             <div className="grid grid-cols-4 items-center gap-4">
                                 <Label htmlFor="c4" className="text-right">
-                                    Non Akademik (C4)
+                                    Prestasi Non Akademik (C4)
                                 </Label>
                                 <Input
                                     id="c4"
@@ -208,7 +260,7 @@ export default function CreateCandidate({}: any) {
                                     value={data.c4}
                                     type="number"
                                     max={100}
-                                    placeholder="Masukkan Non AKademik "
+                                    placeholder="Masukkan Nilai Prestasi Non AKademik "
                                     className="col-span-3"
                                 />
                                 <InputError

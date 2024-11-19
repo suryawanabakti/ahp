@@ -278,9 +278,9 @@ export function DataTableUsers({ data }: { data: Users[] }) {
     return (
         <Card className="w-full">
             <CardHeader>
-                <CardTitle>Users Management</CardTitle>
+                <CardTitle>Manajemen pengguna</CardTitle>
                 <CardDescription>
-                    Users Management adalah sistem yang dirancang untuk
+                    Manajemen pengguna adalah sistem yang dirancang untuk
                     mengelola data dan akses pengguna dalam suatu aplikasi atau
                     platform.
                 </CardDescription>
@@ -297,7 +297,8 @@ export function DataTableUsers({ data }: { data: Users[] }) {
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button variant="outline" className="ml-auto">
-                                Actions <ChevronDown className="ml-2 h-4 w-4" />
+                                Menu Aksi{" "}
+                                <ChevronDown className="ml-2 h-4 w-4" />
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">

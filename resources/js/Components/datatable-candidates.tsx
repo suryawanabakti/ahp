@@ -60,6 +60,12 @@ export type Users = {
     user: {
         level: string;
     };
+    jumlah_prestasi_akademik: number;
+    jumlah_prestasi_non_akademik: number;
+    c1: number;
+    c2: number;
+    c3: number;
+    c4: number;
     created_at: string;
     updated_at: string;
 };
@@ -71,12 +77,22 @@ export function DataTableCandidates({ data }: { data: Users[] }) {
             return 100;
         }
         if (peringkat == 2) {
-            return 66.6;
+            return 80;
         }
         if (peringkat == 3) {
-            return 33.3;
+            return 60;
+        }
+        if (peringkat == 4) {
+            return 40;
+        }
+        if (peringkat == 5) {
+            return 20;
+        }
+        if (peringkat > 5) {
+            return 0;
         }
     };
+
     const columns: ColumnDef<Users>[] = [
         {
             id: "select",
@@ -128,9 +144,7 @@ export function DataTableCandidates({ data }: { data: Users[] }) {
                     </Button>
                 );
             },
-            cell: ({ row }) => (
-                <div className="lowercase">{row.getValue("id")}</div>
-            ),
+            cell: ({ row }) => <div className="">{row.getValue("id")}</div>,
             enableSorting: true,
         },
         {
@@ -149,28 +163,10 @@ export function DataTableCandidates({ data }: { data: Users[] }) {
                 );
             },
             cell: ({ row }) => (
-                <div className="lowercase">{row.getValue("full_name")}</div>
+                <div className="">{row.getValue("full_name")}</div>
             ),
         },
-        {
-            accessorKey: "level",
-            header: ({ column }) => {
-                return (
-                    <Button
-                        variant="ghost"
-                        onClick={() =>
-                            column.toggleSorting(column.getIsSorted() === "asc")
-                        }
-                    >
-                        Level
-                        <ArrowUpDown className="ml-2 h-4 w-4" />
-                    </Button>
-                );
-            },
-            cell: ({ row }) => (
-                <div className="lowercase">{row.original.user?.level}</div>
-            ),
-        },
+
         {
             accessorKey: "c1",
             header: ({ column }) => {
@@ -187,8 +183,8 @@ export function DataTableCandidates({ data }: { data: Users[] }) {
                 );
             },
             cell: ({ row }) => (
-                <div className="lowercase">
-                    {row.getValue("c1")} /{" "}
+                <div className="">
+                    {row.original.c1 > 5 ? "> 5" : row.original.c1} /{" "}
                     {convertPeringkatToValue(row.getValue("c1"))}
                 </div>
             ),
@@ -208,9 +204,7 @@ export function DataTableCandidates({ data }: { data: Users[] }) {
                     </Button>
                 );
             },
-            cell: ({ row }) => (
-                <div className="lowercase">{row.getValue("c2")}</div>
-            ),
+            cell: ({ row }) => <div className="">{row.getValue("c2")}</div>,
         },
         {
             accessorKey: "c3",
@@ -222,13 +216,16 @@ export function DataTableCandidates({ data }: { data: Users[] }) {
                             column.toggleSorting(column.getIsSorted() === "asc")
                         }
                     >
-                        C3
+                        Prestasi Akademik (C3)
                         <ArrowUpDown className="ml-2 h-4 w-4" />
                     </Button>
                 );
             },
             cell: ({ row }) => (
-                <div className="lowercase">{row.getValue("c3")}</div>
+                <div className="">
+                    Jml : {row.original.jumlah_prestasi_akademik}, Nilai :
+                    {row.getValue("c3")}
+                </div>
             ),
         },
         {
@@ -241,13 +238,17 @@ export function DataTableCandidates({ data }: { data: Users[] }) {
                             column.toggleSorting(column.getIsSorted() === "asc")
                         }
                     >
-                        C4
+                        Prestasi Non Akademik (C4)
                         <ArrowUpDown className="ml-2 h-4 w-4" />
                     </Button>
                 );
             },
             cell: ({ row }) => (
-                <div className="lowercase">{row.getValue("c4")}</div>
+                <div className="">
+                    {" "}
+                    Jml : {row.original.jumlah_prestasi_non_akademik} , Nilai :
+                    {row.getValue("c4")}
+                </div>
             ),
         },
         {
@@ -275,7 +276,7 @@ export function DataTableCandidates({ data }: { data: Users[] }) {
         },
 
         {
-            id: "actions",
+            id: "aksi",
             enableHiding: false,
             cell: ({ row }) => {
                 const candidate = row.original;
@@ -392,7 +393,7 @@ export function DataTableCandidates({ data }: { data: Users[] }) {
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button variant="outline" className="ml-auto">
-                                Actions
+                                Menu Aksi
                                 <ChevronDown className="ml-2 h-4 w-4" />
                             </Button>
                         </DropdownMenuTrigger>

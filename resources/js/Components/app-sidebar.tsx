@@ -53,7 +53,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 isActive: true,
                 items: [
                     {
-                        title: "Users",
+                        title: "Pengguna",
                         url: "/users",
                         name: "users",
                     },

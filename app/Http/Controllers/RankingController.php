@@ -40,17 +40,23 @@ class RankingController extends Controller
             if ($candidate->c1 == 1) {
                 $candidateC1 = 100;
             } elseif ($candidate->c1 == 2) {
-                $candidateC1 = 66;
+                $candidateC1 = 80;
             } elseif ($candidate->c1 == 3) {
-                $candidateC1 = 33;
+                $candidateC1 = 60;
+            } elseif ($candidate->c1 == 4) {
+                $candidateC1 = 40;
+            } elseif ($candidate->c1 == 2) {
+                $candidateC1 = 20;
+            } elseif ($candidate->c1 > 5) {
+                $candidateC1 = 0;
             }
+
             $score = (
                 ($candidateC1 * $c1) +
                 ($candidate->c2 * $c2) +
                 ($candidate->c3 * $c3) +
                 ($candidate->c4 * $c4)
             );
-
             // Simpan skor dengan data siswa
             $scores[] = [
                 'id' => $candidate->id,

@@ -64,7 +64,7 @@ export function LoginForm({
                                 href="/forgot-password"
                                 className="ml-auto inline-block text-sm underline"
                             >
-                                Forgot your password?
+                                Lupa password ?
                             </Link>
                         </div>
                         <Input
@@ -91,9 +91,9 @@ export function LoginForm({
                     </Button>
                 </div>
                 <div className="mt-4 text-center text-sm">
-                    Don&apos;t have an account?{" "}
+                    Belum punya akun ?{" "}
                     <Link href="/register" className="underline">
-                        Sign up
+                        Daftar disini.
                     </Link>
                 </div>
             </CardContent>

@@ -10,7 +10,7 @@ export default function Users({ users }: any) {
                 link: "/dashboard",
             },
             {
-                label: "Users",
+                label: "Pengguna",
                 link: "/users",
             },
         ],

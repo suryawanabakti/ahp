@@ -35,6 +35,8 @@ class CandidateController extends Controller
             'full_name' => ['required'],
             'npm' => ['required'],
             'jurusan' => ['required'],
+            'jumlah_prestasi_akademik' => ['required'],
+            'jumlah_prestasi_non_akademik' => ['required'],
             'c1' => ['required', 'numeric', 'max:100'],
             'c2' => ['required', 'numeric', 'max:100'],
             'c3' => ['required', 'numeric', 'max:100'],
@@ -49,6 +51,7 @@ class CandidateController extends Controller
         // if ($request->c1 == 3) {
         //     $validatedData['c1'] = 33.33333333333333;
         // }
+
         $user  = User::create([
             'name' => $request->full_name,
             'email' => fake()->email(),
@@ -85,6 +88,8 @@ class CandidateController extends Controller
             'full_name' => ['required'],
             'npm' => ['required'],
             'jurusan' => ['required'],
+            'jumlah_prestasi_akademik' => ['required'],
+            'jumlah_prestasi_non_akademik' => ['required'],
             'c1' => ['required', 'numeric', 'max:100'],
             'c2' => ['required', 'numeric', 'max:100'],
             'c3' => ['required', 'numeric', 'max:100'],

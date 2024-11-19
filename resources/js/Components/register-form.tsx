@@ -37,7 +37,7 @@ export function RegisterForm({}) {
     return (
         <Card className="mx-auto max-w-sm">
             <CardHeader>
-                <CardTitle className="text-2xl">Register</CardTitle>
+                <CardTitle className="text-2xl">Daftar</CardTitle>
                 <CardDescription>
                     Masukkan data anda di bawah untuk masuk ke halaman utama
                     aplikasi.
@@ -171,9 +171,9 @@ export function RegisterForm({}) {
                     </Button>
                 </div>
                 <div className="mt-4 text-center text-sm">
-                    You have an account?{" "}
+                    Sudah punya akun?{" "}
                     <Link href="/login" className="underline">
-                        Sign in
+                        Login disini.
                     </Link>
                 </div>
             </CardContent>

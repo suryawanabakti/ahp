@@ -170,7 +170,8 @@ export function DataTableRankings({ data }: { data: Rankings[] }) {
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button variant="outline" className="ml-auto">
-                                Actions <ChevronDown className="ml-2 h-4 w-4" />
+                                Menu Aksi{" "}
+                                <ChevronDown className="ml-2 h-4 w-4" />
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">

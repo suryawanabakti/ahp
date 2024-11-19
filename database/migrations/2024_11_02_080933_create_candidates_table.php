@@ -21,6 +21,8 @@ return new class extends Migration
             $table->enum('gender', ['male', 'female']);
             $table->string('pdf_raport')->nullable();
             $table->string('pdf_skhu')->nullable();
+            $table->integer('jumlah_prestasi_akademik');
+            $table->integer('jumlah_prestasi_non_akademik');
             $table->float('c1')->default(0);
             $table->float('c2')->default(0);
             $table->float('c3')->default(0);

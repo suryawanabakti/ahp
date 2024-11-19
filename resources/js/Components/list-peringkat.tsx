@@ -32,6 +32,18 @@ const frameworks = [
         value: "3",
         label: "Peringkat 3",
     },
+    {
+        value: "4",
+        label: "Peringkat 4",
+    },
+    {
+        value: "5",
+        label: "Peringkat 5",
+    },
+    {
+        value: "6",
+        label: "Peringkat > 5",
+    },
 ];
 
 export function ListPeringkat({ setData, peringkat }: any) {
