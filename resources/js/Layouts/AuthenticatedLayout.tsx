@@ -8,13 +8,31 @@ import {
 } from "@/Components/ui/breadcrumb";
 import { SidebarProvider, SidebarTrigger } from "@/Components/ui/sidebar";
 import { Link } from "@inertiajs/react";
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren, useEffect, useState } from "react";
 import { Toaster } from "@/Components/ui/toaster";
+import { Button } from "@/Components/ui/button";
+import { Bell, PanelLeft } from "lucide-react";
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/Components/ui/popover";
+import axios from "axios";
 
 export default function Authenticated({
     breadCrumb,
     children,
 }: PropsWithChildren<{ breadCrumb?: any }>) {
+    const [notifications, setNotifications] = useState([]);
+
+    const getNotifications = async () => {
+        const res = await axios.get("/get-notifications");
+        setNotifications(res.data);
+    };
+
+    useEffect(() => {
+        getNotifications();
+    }, []);
     return (
         <SidebarProvider>
             <AppSidebar />
@@ -50,6 +68,49 @@ export default function Authenticated({
                                 ))}
                             </BreadcrumbList>
                         </Breadcrumb>
+                    </div>
+                    <div className="ml-auto me-5">
+                        <Popover>
+                            <PopoverTrigger asChild>
+                                <Button className="relative" variant="ghost">
+                                    <Bell />
+                                    <span className="sr-only">
+                                        Notification
+                                    </span>
+                                    {notifications.length > 0 && (
+                                        <span className="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-500"></span>
+                                    )}
+                                </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-72 p-0">
+                                <div className="p-4 border-b">
+                                    <h3 className="text-sm font-semibold">
+                                        Notifications
+                                    </h3>
+                                </div>
+                                <ul className="max-h-60 overflow-auto">
+                                    {notifications.map((notification: any) => (
+                                        <li
+                                            key={notification.id}
+                                            className="px-4 py-2 hover:bg-gray-100"
+                                        >
+                                            <p className="text-sm capitalize">
+                                                {notification.user.name}{" "}
+                                                {notification.message}
+                                            </p>
+                                            <span className="text-xs text-gray-500">
+                                                {notification.time}
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                                {notifications.length === 0 && (
+                                    <div className="p-4 text-center text-sm text-gray-500">
+                                        No new notifications
+                                    </div>
+                                )}
+                            </PopoverContent>
+                        </Popover>
                     </div>
                 </header>
                 <div style={{ zoom: "92%" }}>{children}</div>

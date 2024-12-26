@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Candidate;
+use App\Models\Notification;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
@@ -36,27 +38,35 @@ class RegisteredUserController extends Controller
             'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+        DB::transaction(function () use ($request) {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'level' => 'maba',
+                'password' => Hash::make($request->password),
+            ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'level' => 'maba',
-            'password' => Hash::make($request->password),
-        ]);
+            Candidate::create([
+                'user_id' => $user->id,
+                'npm' => $request->npm,
+                'pdf_raport' => $request->file('pdf_raport')->store('pdf_raport'),
+                'pdf_skhu' => $request->file('pdf_skhu')->store('pdf_skhu'),
+                'full_name' => $user->name,
+                'jurusan' => $request->jurusan,
+                'jumlah_prestasi_akademik' => 0,
+                'jumlah_prestasi_non_akademik' => 0,
+            ]);
 
-        Candidate::create([
-            'user_id' => $user->id,
-            'npm' => $request->npm,
-            'pdf_raport' => $request->file('pdf_raport')->store('pdf_raport'),
-            'pdf_skhu' => $request->file('pdf_skhu')->store('pdf_skhu'),
-            'full_name' => $user->name,
-            'jurusan' => $request->jurusan,
-        ]);
+            Notification::create([
+                'user_id' => $user->id,
+                'message' => "telah mengupload SKHU dan RAPORT",
+            ]);
 
-        event(new Registered($user));
+            event(new Registered($user));
 
-        Auth::login($user);
+            Auth::login($user);
 
-        return redirect(route('rankings', absolute: false));
+            return redirect(route('rankings', absolute: false));
+        });
     }
 }

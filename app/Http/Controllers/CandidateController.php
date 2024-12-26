@@ -23,7 +23,14 @@ class CandidateController extends Controller
      */
     public function create()
     {
-        return Inertia::render("Admin/Candidates/Create");
+        $users = Candidate::with('user')->get()->map(function ($data) {
+            return [
+                "id" => $data->id,
+                "npm" => $data->npm,
+                "name" => $data->user->name
+            ];
+        });
+        return Inertia::render("Admin/Candidates/Create", ["dataUsers" => $users]);
     }
 
     /**

@@ -1,6 +1,12 @@
 "use client";
 
-import { AwardIcon, Home, LucideGitCompare, Weight } from "lucide-react";
+import {
+    AwardIcon,
+    Home,
+    LucideGitCompare,
+    UserIcon,
+    Weight,
+} from "lucide-react";
 
 import {
     SidebarGroup,
@@ -26,6 +32,17 @@ export function NavMainUser({}) {
                             <Link href={route("rankings")}>
                                 <AwardIcon />
                                 <span>Perankingan</span>
+                            </Link>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
+                    <SidebarMenuItem>
+                        <SidebarMenuButton
+                            asChild
+                            isActive={route().current("profile*")}
+                        >
+                            <Link href={route("profile.edit")}>
+                                <UserIcon />
+                                <span>My Profile</span>
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>

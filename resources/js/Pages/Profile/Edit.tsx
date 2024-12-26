@@ -8,9 +8,23 @@ import UpdateProfileInformationForm from "./Partials/UpdateProfileInformationFor
 export default function Edit({
     mustVerifyEmail,
     status,
-}: PageProps<{ mustVerifyEmail: boolean; status?: string }>) {
+    candidate,
+}: PageProps<{ mustVerifyEmail: boolean; status?: string; candidate: any }>) {
+    const data = {
+        breadCrumb: [
+            {
+                label: "Home",
+                link: "/dashboard",
+            },
+            {
+                label: "Perankingan",
+                link: "/rankings",
+            },
+        ],
+    };
+
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout breadCrumb={data.breadCrumb}>
             <Head title="Profile" />
 
             <div className="py-12">
@@ -20,6 +34,7 @@ export default function Edit({
                             mustVerifyEmail={mustVerifyEmail}
                             status={status}
                             className="max-w-xl"
+                            candidate={candidate}
                         />
                     </div>
 

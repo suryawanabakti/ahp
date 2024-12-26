@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RankingController;
 use App\Http\Controllers\ShowWeightController;
 use App\Http\Controllers\UpdatePairwsiseComparisonController;
+use App\Models\Notification;
 use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,10 @@ Route::get('/users', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/rankings', RankingController::class)->name('rankings');
 
+    Route::get('/get-notifications', function () {
+        return Notification::with('user')->get();
+    });
+
     Route::get('/weights', ShowWeightController::class)->name('weights');
     Route::get('/pairwise-comparison', PairwiseComparisonController::class)->name('pairwise-comparison');
     Route::patch('/pairwise-comparison', UpdatePairwsiseComparisonController::class)->name('pairwise-comparison.update');
@@ -48,7 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('criterias', CriteriaController::class)->names('criterias');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 

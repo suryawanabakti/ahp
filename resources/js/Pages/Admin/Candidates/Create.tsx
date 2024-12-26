@@ -15,11 +15,12 @@ import { Input } from "@/Components/ui/input";
 import { Label } from "@/Components/ui/label";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from "@inertiajs/react";
-import { FormEventHandler } from "react";
+import { FormEventHandler, useState } from "react";
 import InputError from "@/Components/InputError";
 import { ListPeringkat } from "@/Components/list-peringkat";
+import { ListJurusan } from "@/Components/list-jurusan";
 
-export default function CreateCandidate({}: any) {
+export default function CreateCandidate({ dataUsers }: any) {
     const { toast } = useToast();
 
     const { data, setData, processing, post, reset, errors } = useForm({
@@ -63,6 +64,65 @@ export default function CreateCandidate({}: any) {
             },
         ],
     };
+    type User = {
+        id: number;
+        npm: string;
+        name: string;
+    };
+
+    const users: User[] = dataUsers;
+
+    const [user, setUser] = useState<{ npm: string; name: string }>({
+        npm: "",
+        name: "",
+    });
+    const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
+    const [showDropdown, setShowDropdown] = useState(false);
+
+    const handleInputChange = (value: string) => {
+        setData("npm", value);
+        if (value.length == 10) {
+            const filtered = users.filter(
+                (user) =>
+                    user.npm.includes(value) ||
+                    user.name.toLowerCase().includes(value.toLowerCase())
+            );
+            if (filtered.length > 0) {
+                setData({
+                    ...data,
+                    full_name: filtered[0].name,
+                    npm: filtered[0].npm,
+                });
+            }
+        } else {
+            setData({
+                ...data,
+                full_name: "",
+                npm: value,
+            });
+        }
+        // if (value.trim()) {
+        //     const filtered = users.filter(
+        //         (user) =>
+        //             user.npm.includes(value) ||
+        //             user.name.toLowerCase().includes(value.toLowerCase())
+        //     );
+        //     setFilteredUsers(filtered);
+        //     setShowDropdown(filtered.length > 0);
+        // } else {
+        //     setShowDropdown(false);
+        // }
+    };
+
+    const handleSelect = (user: User) => {
+        setData({
+            ...data,
+            full_name: user.name,
+            npm: user.npm,
+        });
+
+        setShowDropdown(false);
+    };
 
     return (
         <AuthenticatedLayout breadCrumb={datas.breadCrumb}>
@@ -88,6 +148,42 @@ export default function CreateCandidate({}: any) {
                         <div className="grid gap-4 py-4">
                             {" "}
                             <div className="grid grid-cols-4 items-center gap-4">
+                                <Label htmlFor="npm" className="text-right">
+                                    NPM
+                                </Label>
+                                <div className="relative w-full max-w-md">
+                                    <Input
+                                        id="npm"
+                                        value={data.npm}
+                                        onChange={(e) =>
+                                            handleInputChange(e.target.value)
+                                        }
+                                        placeholder="Masukkan NPM..."
+                                        autoComplete="off"
+                                    />
+                                    {showDropdown && (
+                                        <div className="absolute top-full mt-2 w-full bg-white border border-gray-300 rounded shadow-lg z-10">
+                                            {filteredUsers.map((user) => (
+                                                <div
+                                                    key={user.id}
+                                                    className="p-2 cursor-pointer hover:bg-gray-100"
+                                                    onClick={() =>
+                                                        handleSelect(user)
+                                                    }
+                                                >
+                                                    {user.npm} - {user.name}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+
+                                <InputError
+                                    className="col-span-2 text-right"
+                                    message={errors.full_name}
+                                />
+                            </div>
+                            <div className="grid grid-cols-4 items-center gap-4">
                                 <Label
                                     htmlFor="full_name"
                                     className="text-right"
@@ -109,36 +205,11 @@ export default function CreateCandidate({}: any) {
                                 />
                             </div>
                             <div className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor="npm" className="text-right">
-                                    NPM
-                                </Label>
-                                <Input
-                                    id="npm"
-                                    value={data.npm}
-                                    onChange={(e) =>
-                                        setData("npm", e.target.value)
-                                    }
-                                    placeholder="Masukkan NPM..."
-                                    className="col-span-3"
-                                />
-                                <InputError
-                                    className="col-span-2 text-right"
-                                    message={errors.full_name}
-                                />
-                            </div>
-                            <div className="grid grid-cols-4 items-center gap-4">
                                 <Label htmlFor="jurusan" className="text-right">
                                     Jurusan
                                 </Label>
-                                <Input
-                                    id="jurusan"
-                                    value={data.jurusan}
-                                    onChange={(e) =>
-                                        setData("jurusan", e.target.value)
-                                    }
-                                    placeholder="Masukkan jurusan..."
-                                    className="col-span-3"
-                                />
+                                <ListJurusan setData={setData} />
+
                                 <InputError
                                     className="col-span-2 text-right"
                                     message={errors.jurusan}

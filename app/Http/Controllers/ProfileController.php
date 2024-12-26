@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Candidate;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -16,18 +17,20 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): Response
+    public function edit(Request $request)
     {
+        $candidate = Candidate::where('user_id', auth()->id())->first();
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
+            'candidate' => $candidate ?? null,
         ]);
     }
 
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(ProfileUpdateRequest $request)
     {
         $request->user()->fill($request->validated());
 
@@ -37,13 +40,19 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
+
+        Candidate::where('user_id', auth()->id())
+            ->update([
+                'pdf_raport' => $request->file('pdf_raport')->store('pdf_raport'),
+                'pdf_skhu' => $request->file('pdf_skhu')->store('pdf_skhu'),
+            ]);
         return Redirect::route('profile.edit');
     }
 
     /**
      * Delete the user's account.
      */
-    public function destroy(Request $request): RedirectResponse
+    public function destroy(Request $request)
     {
         $request->validate([
             'password' => ['required', 'current_password'],

@@ -72,7 +72,7 @@ class RankingController extends Controller
 
 
         return Inertia::render("Admin/Rankings/page", [
-            "scores" => $scores
+            "scores" => collect($scores)->take(10)
         ]);
     }
 }
